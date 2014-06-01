@@ -18,22 +18,20 @@ MovingObject.prototype.move = function () {
 };
 
 MovingObject.prototype.offEdge = function () {
-  if(this.centerX > 800) {
-    this.centerX %= 800;
-  } else if (this.centerX < 0) {
-    this.centerX += 800;
+  if(this.centerX > Asteroids.Game.DIM_X + this.radius) {
+    this.centerX  = -this.radius;
+  } else if (this.centerX + this.radius < 0) {
+    this.centerX = Asteroids.Game.DIM_X + this.radius;
   };
 
-  if (this.centerY > 600) {
-    this.centerY %= 600;
-  } else if (this.centerY < 0) {
-    this.centerY += 600;
+  if (this.centerY > Asteroids.Game.DIM_Y + this.radius) {
+    this.centerY = -this.radius;
+  } else if (this.centerY < -this.radius) {
+    this.centerY = Asteroids.Game.DIM_Y + this.radius;
   };
 };
 
 MovingObject.prototype.draw = function (ctx) {
-  //var ctx = canvasEl.getContext("2d");
-  //ctx.clearRect(0, 0, 800, 600);
   ctx.fillStyle = this.color;
   ctx.beginPath();
 
@@ -65,9 +63,6 @@ MovingObject.prototype.isCollidedWith = function (otherObjects) {
     var distance = Math.sqrt(
       Math.pow((thisObject.centerX - otherX),2) +
       Math.pow((thisObject.centerY - otherY), 2));
-
-      //console.log(distance);
-      //console.log(sumRadii);
 
       if (distance < sumRadii) {
         collidingObjects.push(otherObject);

@@ -18,8 +18,8 @@ var Asteroid = Asteroids.Asteroid = function (pos, vel) {
 Asteroid.inherits(Asteroids.MovingObject);
 
 var randomAsteroid = Asteroid.randomAsteroid = function () {
-  var x = Math.random() * 800;
-  var y = Math.random() * 600;
+  var x = Math.random() * Asteroids.Game.DIM_X;
+  var y = Math.random() * Asteroids.Game.DIM_Y;
   var xVel = (Math.random() * 4) - 2;
   var yVel = (Math.random() * 4) - 2;
   return new Asteroid([x, y], [xVel, yVel]);
@@ -30,8 +30,6 @@ Asteroid.prototype.bounce = function (collidingObject) {
   sumY = (this.vel[1] + collidingObject.vel[1]);
   this.vel = [sumX - this.vel[0], sumY - this.vel[1]];
   collidingObject.vel = [sumX - collidingObject.vel[0], sumY - collidingObject.vel[1]];
-  // this.move();
-  // collidingObject.move();
 }
 
 })(this);

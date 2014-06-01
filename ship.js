@@ -11,7 +11,6 @@ Function.prototype.inherits = function(parentClass) {
 var COLOR = "blue";
 var RADIUS = 20;
 
-
 var Ship = Asteroids.Ship = function() {
   Asteroids.MovingObject.call(this, Asteroids.Game.CENTER, [0,0], RADIUS, COLOR);
   this.heading = 0;
@@ -31,7 +30,8 @@ Ship.prototype.fireBullet = function() {
 Ship.prototype.thrust = function(direction) {
   switch (direction) {
   case "left":
-    this.vel[0] -= .5;
+    this.heading += (0.2 * Math.PI);
+    // this.vel[0] -= .5;
     // if (key.isPressed("down")) {
     //   this.vel[1] += .5;
     // } else if (key.isPressed("up")) {
@@ -39,7 +39,7 @@ Ship.prototype.thrust = function(direction) {
     // };
     break;
   case "right":
-    this.vel[0] += .5;
+    this.heading -= (0.2 * Math.PI);
     // if (key.isPressed("down")) {
     //   this.vel[1] += .5;
     // } else if (key.isPressed("up")) {
@@ -65,8 +65,6 @@ Ship.prototype.thrust = function(direction) {
   case "stop":
     this.vel = [0,0];
     break;
-  default:
-    console.log("unrecognized key");
   };
 
   if (this.vel[0] < -5) {
@@ -94,18 +92,33 @@ Ship.prototype.rotate = function(direction) {
 };
 
 Ship.prototype.draw = function (ctx) {
+  ctx.fillStyle = "red";
+  // ctx.rotate(this.heading / (2 * Math.PI));
+  ctx.beginPath();
+
+  ctx.arc(
+    this.centerX,
+    this.centerY,
+    this.radius,
+    0,
+    2 * Math.PI,
+    false
+  );
+  
+
+  ctx.fill();
   //var ctx = canvasEl.getContext("2d");
   //ctx.clearRect(0, 0, 800, 600);
   // ctx.translate(this.centerX - 67, this.centerY -20);
 
   // OH MY GOD THIS IS SO FUCKED UP
   ctx.save() // Save the original context state
-  ctx.translate(this.centerX, this.centerY); // Move the origin to the center of our ship
-  ctx.rotate(this.heading / (2 * Math.PI)); // Rotate the context to match the desired rotation of our ship
-  ctx.drawImage(ent, 
-    0, 0,3500,1600,
-    -67, -20, 90, 40);
-  ctx.restore(); // Restore the pre-fucked context.
+  // ctx.translate(this.centerX, this.centerY); // Move the origin to the center of our ship
+   // Rotate the context to match the desired rotation of our ship
+  // ctx.drawImage(ent, 
+    // 0, 0,3500,1600,
+    // -67, -20, 90, 40);
+  // ctx.restore(); // Restore the pre-fucked context.
 };
 
 

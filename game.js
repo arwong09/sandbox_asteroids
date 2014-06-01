@@ -1,13 +1,6 @@
 (function (root) {
 var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-var frames = 0;
-var fps = 0;
-window.setInterval(function() {
-  fps = frames;
-  frames = 0;
-  }, 1000);
-
 var Game = Asteroids.Game = function(context, numAsteroids) {
   this.context = context;
   this.asteroids = [];
@@ -16,8 +9,8 @@ var Game = Asteroids.Game = function(context, numAsteroids) {
   this.ship = new Asteroids.Ship();
 };
 
-var DIM_X = Game.DIM_X = 800;
-var DIM_Y = Game.DIM_Y = 600;
+var DIM_X = Game.DIM_X = screen.width;
+var DIM_Y = Game.DIM_Y = screen.height;
 var CENTER = Game.CENTER = [DIM_X / 2, DIM_Y / 2];
 var RATE = Game.RATE = 30;
 var loop = undefined;
@@ -31,9 +24,7 @@ Game.prototype.seedAsteroids = function (num) {
 
 Game.prototype.start = function() {
   var game = this;
-  loop = window.setInterval(function() {
-                                  game.step();},
-                                   RATE);
+  loop = window.setInterval(function() { game.step() }, 20);
 };
 
 Game.prototype.step = function () {
@@ -69,7 +60,6 @@ Game.prototype.step = function () {
   if (keys.indexOf(38) > -1) {
     this.fireBullet();
   };
-  frames += 1;
 };
 
 Game.prototype.move = function() {
@@ -105,7 +95,6 @@ Game.prototype.move = function() {
 Game.prototype.draw = function () {
   this.context.clearRect(0, 0, DIM_X, DIM_Y);
   var context = this.context
-  context.fillText(fps, 5, 10);
   this.ship.draw(context);
 
   this.asteroids.forEach(function(asteroid) {
@@ -121,8 +110,6 @@ Game.prototype.checkShipCollisions = function() {
 
   if (this.ship.isCollidedWith(this.asteroids).length > 0) {
     window.clearInterval(loop);
-    alert("YOU DIED");
-
   };
 };
 
@@ -145,7 +132,6 @@ Game.prototype.removeAsteroid = function(asteroid) {
 
 Game.prototype.gameOver = function () {
   if(this.asteroids.length === 0) {
-    alert("YOU DEFEATED ASTEROIDS");
     window.clearInterval(loop);
   } else {
     return false;
