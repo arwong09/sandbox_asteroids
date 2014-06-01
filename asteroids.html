@@ -1,0 +1,44 @@
+<html>
+<head>
+  <style>
+    body {
+      background-image: url('space.jpeg');
+    }
+  </style>
+  <title>ASTEROIDS!</title>
+</head>
+
+<body>
+  <div id="content">
+  </div>
+
+  <!-- first load the jQuery library hosted by Google -->
+  <script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+  </script>
+  <!-- then load our own app.js code -->
+  <script type="application/javascript" src="moving_object.js"></script>
+  <script type="application/javascript" src="asteroid.js"></script>
+  <script type="application/javascript" src="game.js"></script>
+  <script type="application/javascript" src="ship.js"></script>
+  <script type="application/javascript" src="keymaster.js"></script>
+  <script type="application/javascript" src="bullets.js"></script>
+
+  <canvas></canvas>
+
+  <script>
+  alert("Move with WASD, rotate with LEFT and RIGHT, shoot with UP");
+
+  var canvas = document.getElementsByTagName("canvas")[0];
+  canvas.width = Asteroids.Game.DIM_X;
+  canvas.height = Asteroids.Game.DIM_Y;
+  var ctx = canvas.getContext("2d");
+  var game = new Asteroids.Game(ctx, 10);
+
+  ent = new Image();
+  ent.src = "enterprise.png";
+  // game.bindKeyHandlers();
+  game.start();
+
+  </script>
+</body>
+</html>
