@@ -16,15 +16,22 @@ var Bullet = Asteroids.Bullet = function (ship) {
   //                 Math.pow(ship.vel[1], 2));
   //var speedConst = 15 / shipSpeed;
   // var bulletVelocity = [ship.vel[0] * speedConst, ship.vel[1] * speedConst];
+
+  if(ship.vel[0] < 1) {
+    var normalizedVel = 1;
+  } else {
+    normalizedVel = ship.vel[0];
+  }
+  
   var heading = ship.heading;
-  var shipX = ship.vel[0] * Math.sin(heading);
-  var shipY = ship.vel[0] * Math.cos(heading);
+  var shipX = normalizedVel * Math.sin(heading);
+  var shipY = normalizedVel * Math.cos(heading);
   
   var xMag = Math.pow(shipX, 2);
   var yMag = Math.pow(shipY, 2);
   var shipMag = Math.sqrt(xMag + yMag);
   // var normalizedVel = [(shipX) / shipMag, (shipY) / shipMag];
-  var bulletVelocity = [ (shipX / shipMag) * 12, (shipY / shipMag) * 12]
+  var bulletVelocity = [ (shipX / shipMag) * 15, (shipY / shipMag) * 15]
   // var bulletVelocity = 
 
   Asteroids.MovingObject.call(

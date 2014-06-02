@@ -8,8 +8,8 @@ Function.prototype.inherits = function(parentClass) {
   this.prototype = new Surrogate();
 };
 
-var COLOR = "black";
-var RADIUS = 10;
+var COLOR = "#333";
+var RADIUS = 20;
 
 var Asteroid = Asteroids.Asteroid = function (pos, vel) {
   Asteroids.MovingObject.call(this, pos, vel, Math.random() * 20 + RADIUS, COLOR);
@@ -17,11 +17,16 @@ var Asteroid = Asteroids.Asteroid = function (pos, vel) {
 
 Asteroid.inherits(Asteroids.MovingObject);
 
-var randomAsteroid = Asteroid.randomAsteroid = function () {
+var randomAsteroid = Asteroid.randomAsteroid = function (minY) {
   var x = Math.random() * Asteroids.Game.DIM_X;
-  var y = Math.random() * Asteroids.Game.DIM_Y;
-  var xVel = (Math.random() * 4) - 2;
-  var yVel = (Math.random() * 4) - 2;
+  // if (minY) {
+  var y = -20;
+  // } else {
+    // var y = Math.random() * Asteroids.Game.DIM_Y;
+  // }
+  // var xVel = (Math.random() * 4) - 2;
+  var xVel = 0;
+  var yVel = (Math.random() * 3) + 1;
   return new Asteroid([x, y], [xVel, yVel]);
 }
 

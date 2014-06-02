@@ -6,6 +6,7 @@
     height: 100%;
     margin: 0;
     overflow: hidden;
+    background-color: #fefefe;
   }
     canvas {
       overflow: hidden;
@@ -38,6 +39,7 @@
     var game = new Asteroids.Game(ctx, 10);
     
     game.start();
+    game.generateAsteroids();
 
   </script>
 </body>
