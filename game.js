@@ -12,9 +12,6 @@ var Game = Asteroids.Game = function(context, numAsteroids) {
 var DIM_X = Game.DIM_X = screen.width;
 var DIM_Y = Game.DIM_Y = screen.height;
 var CENTER = Game.CENTER = [DIM_X / 2, DIM_Y / 2];
-var RATE = Game.RATE = 30;
-var loop = undefined;
-
 
 Game.prototype.seedAsteroids = function (num) {
   for (var i = 0; i < num; i++) {
@@ -57,7 +54,7 @@ Game.prototype.step = function () {
   if (keys.indexOf(39) > -1) {
     this.ship.rotate("clockwise");
   };
-  if (keys.indexOf(38) > -1) {
+  if (keys.indexOf(32) > -1) {
     this.fireBullet();
   };
 };
